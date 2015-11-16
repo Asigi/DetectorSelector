@@ -50,8 +50,29 @@ angular.module('DetectorSelector.controllers', ['DetectorSelector.services', 'ng
                 //pw: pass
             
             $scope.login = function(un, pw){
-                console.log("UserName: " + un);
-                console.log("Password: " + pw);
+                //console.log("UserName: " + un);
+                //console.log("Password: " + pw);
+                
+                Parse.User.logIn(un, pw, {
+                    success: function(user) {
+                        // Do stuff after successful login.
+                        console.log("success, your username is: ");
+                        console.log(user);
+                    },
+                    error: function(user, error) {
+                         // The login failed. Check error to see why.
+                         console.log("shit error: " + error);
+                    }
+}               );
+                
+                
+                
+                
+                
+                
+                
+                
+                
             };
             
         })
