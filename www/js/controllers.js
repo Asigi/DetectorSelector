@@ -75,6 +75,7 @@ angular.module('DetectorSelector.controllers', ['DetectorSelector.services', 'ng
             
             $scope.newAccount = function(un, em, pw){
                 
+                console.log(un + em + pw);
                 
             };
         })
