@@ -1,0 +1,54 @@
+<ion-view>
+    <ion-nav-title>
+        <span style="color: whitesmoke;">Detector Selector
+        </span>
+    </ion-nav-title>
+    <ion-content style="text-align: center">  
+        <br>
+        <br>
+        <br>
+        <img src="lib/detectorData/img/home_icon.jpg" style="height:100px; opacity: 0.7;">
+
+    </ion-content>
+
+    <hr>
+    <div class="searchOptions">
+        <h4>BROWSE DETECTORS</h4>
+        <hr>
+        <div class="row">
+            <div class="col">
+                <button class="button button-clear button-assertive" ng-click="searchScenario()">
+                    <img src="lib/detectorData/img/scenarioIcon.png" style="height: 80px;">
+                </button>
+                <br>
+                <p>Browse by Scenario</p>
+            </div>
+            <div class="col">
+                <button class="button button-clear button-assertive" ng-click="searchType()">
+                    <img src="lib/detectorData/img/typeIcon.png" style="height: 45px;">
+                </button>
+                <br>
+                <p>Browse by Type</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <button class="button button-clear button-assertive" ng-click="goSearch()">
+                    <img src="lib/detectorData/img/all_detectors.png" style="height: 40px">
+                </button>
+                <br>
+                <p>Custom Search</p>
+            </div>
+            <div class="col">
+                <button class="button button-clear button-assertive" ng-click="goScenario('')">
+                    <img src="lib/detectorData/img/search_detectors.png" style="height: 40px">
+                </button>
+                <br>
+                <p>Browse All</p>
+            </div>
+        </div>
+        <br>
+        <hr style="color: orangered">
+    </div>
+    <ion-footer-bar class="bar-stable"></ion-footer-bar>
+</ion-view>

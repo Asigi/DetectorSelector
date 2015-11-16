@@ -1,0 +1,48 @@
+<!--ion-view view-title="Detectors"-->
+<ion-view>
+    <ion-nav-title>
+        <span style="color: whitesmoke;">Detectors</span>
+    </ion-nav-title>
+    <ion-header-bar class="bar-light bar-subheader">
+        <div style="padding-bottom: 2px;">
+            <label class="item item-input" style=" width: 100%; text-align: center;">
+                <i class="icon ion-search placeholder-icon"></i>
+                <input type="text" placeholder="Keyword Search" ng-model="searchName">
+            </label>
+        </div>
+    </ion-header-bar>
+    <ion-content>
+        <!--h3>Search results: </h3-->
+        <ion-list>
+            <!--
+            <ion-item ng-repeat="detector in detectors | filter:{scenario:userScenario}" ng-Click="goDetails(detector)">
+                <h3>{{detector.DetectorName}}</h3>
+            </ion-item>
+            <ion-item ng-repeat="detector in detectors | filter:{type:userType}" ng-Click="goDetails(detector)">
+                <h3>{{detector.DetectorName}}</h3>
+            </ion-item>
+            -->
+            <ion-item ng-repeat="detector in detectors| filter:searchName | limitTo: totalDisplayed" ng-Click="goDetails(detector)">
+                <div class="row">
+                    <h2>{{detector.DetectorName}}</h2>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <img style="height: 30px;" ng-src ="lib/detectorData/DetectorsImg/{{detector.DetectorID}}.jpg">
+                    </div>
+                    <div class="col">
+                        <img ng-src="{{getTypeImage(detector)}}" style="width: 50%;">
+                    </div>
+                    <div class="col">
+                        <img ng-src="{{getMobImage(detector)}}" style="width:20%;">
+                        <img ng-src="{{getFieldImage(detector)}}" style="width:20%;">
+                        <img ng-src="{{getAnalImage(detector)}}" style="width:20%;">
+                        <img ng-src="{{getDiagImage(detector)}}" style="width:20%;">
+                    </div>
+                </div>
+            </ion-item>
+        </ion-list>
+        <ion-infinite-scroll 
+            on-infinite="addMoreItem()" distance="5%"></ion-infinite-scroll>
+    </ion-content>
+</ion-view>

@@ -1,0 +1,45 @@
+<ion-view>
+    <ion-nav-title>
+        <span style="color: whitesmoke;">Detector Selector</span>
+    </ion-nav-title>
+  <ion-content style="text-align: center">  
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <img src="lib/detectorData/img/home_icon.jpg" style="height:100px; opacity: 0.7;">
+
+    </ion-content>
+    
+    <hr>
+      <div class="searchOptions">
+            <h4>SELECT TYPE</h4>
+            <hr>
+            <div class="row">
+                <div class="col">
+                    <button class="button button-clear button-assertive" ng-click="goType('bio')">
+                        <img src="lib/detectorData/img/bioicon.png" style="height: 40px">
+                    </button>
+                    <br>
+                    <p>Biological</p>
+                </div>
+                <div class="col">
+                    <button class="button button-clear button-assertive" ng-click="goType('chem')">
+                        <img src="lib/detectorData/img/chemicon.png" style="height: 40px">
+                    </button>
+                    <br>
+                    <p>Chemical</p>
+                </div>
+                <div class="col">
+                    <button class="button button-clear button-assertive" ng-click="goType('rad')">
+                        <img src="lib/detectorData/img/radicon.png" style="height: 40px">
+                    </button>
+                    <br>
+                    <p>Radiological</p>
+                </div>
+            </div>
+            <hr style="color: orangered">
+      </div>
+    <ion-footer-bar class="bar-stable"></ion-footer-bar>
+</ion-view>

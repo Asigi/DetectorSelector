@@ -1,0 +1,72 @@
+<ion-view>
+    <ion-nav-title>
+        <span style="color: whitesmoke;">Custom Search</span>
+    </ion-nav-title>
+    <ion-content>
+        <br>
+        <br>
+        <br>
+        <div class="list">
+            <label class="item item-input item-select">
+                <div class="input-label">
+                    Detector Type:
+                </div>
+                <select ng-model="type" ng-change="typeChange(type)">
+                    <option>Rad</option>
+                    <option>Chem</option>
+                    <option>Bio</option>
+                    <option>Bio & Chem</option>
+                    <option>Chem & Rad</option>
+                    <option>Bio & Rad</option>
+                    <option>Bio & Chem & Rad</option>
+                </select>
+            </label>
+            <label class ="item item-input item-select">
+                <div class="input-label">
+                    Scenario:
+                </div>
+                <select ng-model="scenario" ng-change="scenarioChange(scenario)">
+                    <option>Field</option>
+                    <option>Mobile</option>
+                    <option>Analytical</option>
+                    <option>Diagnostic</option>
+                </select>
+            </label>
+            <!--
+            <label class ="item item-input item-select">
+                <div class="input-label">
+                    Scenario Tier:
+                </div>
+                <select ng-model="tier" ng-change="tierChange(tier)">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                </select>
+            </label>
+            <label class ="item item-input item-select">
+                <div class="input-label">
+                    System Cost:
+                </div>
+                <select ng-model="sysCost" ng-change="sysCostChange(sysCost)">
+                    <option>< $150,000</option>
+                    <option>$150,000 - $300,000</option>
+                    <option>$300,000 - $450,000</option>
+                    <option>$450,000 - $600,000</option>
+                    <option>$600,000 +</option>
+                </select>
+            </label>
+            -->
+        </div>
+        <br>
+        <br>
+        <br>
+        <div style="text-align: center;">        
+            <button class="button button-assertive" ng-click="search()">
+                Search
+            </button>
+        </div>
+    </ion-content>
+    <ion-footer-bar class="bar-stable"></ion-footer-bar>
+</ion-view>

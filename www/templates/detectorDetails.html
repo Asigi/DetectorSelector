@@ -1,0 +1,92 @@
+<ion-view>
+    <ion-nav-title>
+        <span style="color: whitesmoke;">{{selected.DetectorName}}</span>
+    </ion-nav-title>
+    <ion-content style="text-align: center">
+        <h4>{{selected.DetectorName}}</h4>
+        <!--img ng-src="{{selected.image}}"-->
+        <img ng-src ="lib/detectorData/DetectorsImg/{{selected.DetectorID}}.jpg">
+        <br>
+        <img ng-src="{{typeImage}}" style="width: 30%;">
+        <div class="detectorSmallDetails">
+            <div class="row">
+                <div class="col">
+                    <p>System Cost: {{selected.sysCost| currency:"$"}}</p>
+                    <p>Analysis Cost: {{selected.anaCost| currency: "$"}}</p>
+                </div>
+                <div class="col">
+                    <p>Survey Source: {{selected.surveySource}}</p>
+                    <p>Contact: {{selected.contact}}</p>
+                    <p>{{selected.email}}</p>
+                    <p>{{selected.url}}</p>
+                </div>
+            </div>
+            <p>User Rating: {{selected.userRating}}</p>
+        </div>
+        <div class="detectorLargeDetails">
+            <h4 style="text-align: left;"><b>Description:</b></h4>
+            <p ng-bind-html="selected.Description" class="techDescription"></p>
+            <h4 style="text-align: left;"><b>Technical Description:</b></h4>
+            <p ng-bind-html="selected.techDescription"class="techDescription"></p>
+            <!--br>
+            <p>{{selected.notes}}</p>
+            <img style="width:80%;" ng-src="{{selected.scoreImage}}">
+            <br>
+            <br>
+            <br>
+            <img style="width:80%;" ng-src="{{selected.impactImage}}"-->
+            <br>
+            <br>
+            <h4 style="text-align: left;"><b>Tier Selection:</b></h4>
+        </div>
+        
+        <div class="detectorTable">
+            <table>
+                <tr>
+                    <td></td>
+                    <td><img ng-src="lib/detectorData/img/bioicon.png" style="width: 40%;"></td>
+                    <td><img ng-src="lib/detectorData/img/chemicon.png" style="width: 40%;"></td>
+                    <td><img ng-src="lib/detectorData/img/radicon.png" style="width: 40%;"></td>
+                </tr>
+                <tr>
+                    <td>Field Use</td>
+                    <td><img ng-src="{{bioFieldTierImg(selected)}}" style="width: 15px;"></td>
+                    <td><img ng-src="{{chemFieldTierImg(selected)}}" style="width: 15px;"></td>
+                    <td><img ng-src="{{radFieldTierImg(selected)}}" style="width: 15px;"></td>
+                </tr>
+                <tr>
+                    <td>Mobile</td>
+                    <td><img ng-src="{{bioMobTierImg(selected)}}" style="width: 15px;"></td>
+                    <td><img ng-src="{{chemMobTierImg(selected)}}" style="width: 15px;"></td>
+                    <td><img ng-src="{{radMobTierImg(selected)}}" style="width: 15px;"></td>
+                </tr>
+                <tr>
+                    <td>Diagnostic</td>
+                    <td><img ng-src="{{bioDiagTierImg(selected)}}" style="width: 15px;"></td>
+                    <td><img ng-src="{{chemDiagTierImg(selected)}}" style="width: 15px;"></td>
+                    <td><img ng-src="{{radDiagTierImg(selected)}}" style="width: 15px;"></td>
+                </tr>
+                <tr>
+                    <td>Analytical</td>
+                    <td><img ng-src="{{bioAnalTierImg(selected)}}" style="width: 15px;"></td>
+                    <td><img ng-src="{{chemAnalTierImg(selected)}}" style="width: 15px;"></td>
+                    <td><img ng-src="{{radAnalTierImg(selected)}}" style="width: 15px;"></td>
+                </tr> 
+            </table>
+            <br>
+            <br>
+            <p>
+                <small>
+                    Tier Key: <br>
+                    <img ng-src="lib/detectorData/img/tier1.png" style="width: 15px"> Top Tier    
+                    <img ng-src="lib/detectorData/img/tier2.png" style="width: 15px"> Second Tier 
+                    <br>
+                    <img ng-src="lib/detectorData/img/tier3.png" style="width: 15px"> Third Tier    
+                    <img ng-src="lib/detectorData/img/tier4.png" style="width: 15px"> Fourth Tier    
+                    <img ng-src="lib/detectorData/img/tier5.png" style="width: 15px"> Bottom Tier    
+                </small>
+            </p>
+        </div>
+    </ion-content>
+
+</ion-view>
