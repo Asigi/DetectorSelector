@@ -10,10 +10,14 @@ angular.module('DetectorSelector.controllers', ['DetectorSelector.services', 'ng
                 $state.go('app.search');
             };
 
-            $scope.goLogin = function () {  
+            $scope.goLogin = function () {
                 $state.go('app.login');
             };
             
+            $scope.goNewAccount = function () {
+                $state.go('app.newAccount');
+            };
+
             $scope.goAbout = function () {
                 $state.go('app.about');
             };
@@ -42,39 +46,37 @@ angular.module('DetectorSelector.controllers', ['DetectorSelector.services', 'ng
             };
 
         })
-        
-        .controller('LoginCtrl', function($scope, $rootScope, $state) {
-            
+
+        .controller('LoginCtrl', function ($scope, $rootScope, $state) {
+
             //test user credentials:
-                //un: testuser
-                //pw: pass
-            
-            $scope.login = function(un, pw){
+            //un: testuser
+            //pw: pass
+
+            $scope.login = function (un, pw) {
                 //console.log("UserName: " + un);
                 //console.log("Password: " + pw);
-                
+
                 Parse.User.logIn(un, pw, {
-                    success: function(user) {
+                    success: function (user) {
                         // Do stuff after successful login.
                         console.log("success, your username is: ");
                         console.log(user);
                     },
-                    error: function(user, error) {
-                         // The login failed. Check error to see why.
-                         console.log("shit error: " + error);
+                    error: function (user, error) {
+                        // The login failed. Check error to see why.
+                        console.log("shit error: " + error);
                     }
-}               );
-                
-                
-                
-                
-                
-                
-                
+                });
+            };
+        })
+
+        .controller('NewAccountCtrl', function($scope, $rootScope, $state){
+            
+            $scope.newAccount = function(un, em, pw){
                 
                 
             };
-            
         })
 
         .controller('ScenarioCtrl', function ($scope, $rootScope, $state) {
@@ -368,9 +370,9 @@ angular.module('DetectorSelector.controllers', ['DetectorSelector.services', 'ng
                         return "lib/detectorData/img/tier.png";
                 }
             };
-            
+
             //set the icons for diag use
-            $scope.bioDiagTierImg = function(det) {
+            $scope.bioDiagTierImg = function (det) {
                 switch (det.bioDiagTier) {
                     case "1":
                         return "lib/detectorData/img/tier1.png";
@@ -387,11 +389,11 @@ angular.module('DetectorSelector.controllers', ['DetectorSelector.services', 'ng
                     case "5":
                         return "lib/detectorData/img/tier5.png";
                         break;
-                    default: 
+                    default:
                         return "lib/detectorData/img/tier.png";
                 }
             };
-            $scope.chemDiagTierImg = function(det) {
+            $scope.chemDiagTierImg = function (det) {
                 switch (det.chemDiagTier) {
                     case "1":
                         return "lib/detectorData/img/tier1.png";
@@ -408,11 +410,11 @@ angular.module('DetectorSelector.controllers', ['DetectorSelector.services', 'ng
                     case "5":
                         return "lib/detectorData/img/tier5.png";
                         break;
-                    default: 
+                    default:
                         return "lib/detectorData/img/tier.png";
                 }
             };
-            $scope.radDiagTierImg = function(det) {
+            $scope.radDiagTierImg = function (det) {
                 switch (det.radDiagTier) {
                     case "1":
                         return "lib/detectorData/img/tier1.png";
@@ -429,13 +431,13 @@ angular.module('DetectorSelector.controllers', ['DetectorSelector.services', 'ng
                     case "5":
                         return "lib/detectorData/img/tier5.png";
                         break;
-                    default: 
+                    default:
                         return "lib/detectorData/img/tier.png";
                 }
             };
-            
+
             //set the anal images
-            $scope.bioAnalTierImg = function(det) {
+            $scope.bioAnalTierImg = function (det) {
                 switch (det.bioAnalTier) {
                     case "1":
                         return "lib/detectorData/img/tier1.png";
@@ -452,11 +454,11 @@ angular.module('DetectorSelector.controllers', ['DetectorSelector.services', 'ng
                     case "5":
                         return "lib/detectorData/img/tier5.png";
                         break;
-                    default: 
+                    default:
                         return "lib/detectorData/img/tier.png";
                 }
             };
-            $scope.chemAnalTierImg = function(det) {
+            $scope.chemAnalTierImg = function (det) {
                 switch (det.chemAnalTier) {
                     case "1":
                         return "lib/detectorData/img/tier1.png";
@@ -473,11 +475,11 @@ angular.module('DetectorSelector.controllers', ['DetectorSelector.services', 'ng
                     case "5":
                         return "lib/detectorData/img/tier5.png";
                         break;
-                    default: 
+                    default:
                         return "lib/detectorData/img/tier.png";
                 }
             };
-            $scope.radAnalTierImg = function(det) {
+            $scope.radAnalTierImg = function (det) {
                 switch (det.radAnalTier) {
                     case "1":
                         return "lib/detectorData/img/tier1.png";
@@ -494,7 +496,7 @@ angular.module('DetectorSelector.controllers', ['DetectorSelector.services', 'ng
                     case "5":
                         return "lib/detectorData/img/tier5.png";
                         break;
-                    default: 
+                    default:
                         return "lib/detectorData/img/tier.png";
                 }
             };

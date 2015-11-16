@@ -79,6 +79,15 @@ angular.module('DetectorSelector', ['ionic', 'DetectorSelector.controllers', 'De
         }
     })
     
+    .state('app.newAccount', {
+        url: "/newAccount",
+        views: {
+            'menuContent':{
+              templateUrl: "templates/newAccount.html",
+              controller: "NewAccountCtrl"
+            }
+        }
+    })
     .state('app.scenario', {
       url: "/scenario",
       views: {

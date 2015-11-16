@@ -1,6 +1,6 @@
 <ion-view>
     <ion-nav-title>
-        <span style="color: whitesmoke;">Custom Search</span>
+        <span style="color: whitesmoke;">Create a New Account</span>
     </ion-nav-title>
     <ion-content>
         <br>
@@ -8,13 +8,19 @@
         <br>
         <div>
             <label class="item item-input">
-                <span class="input-label">Username</span>
+                <span class="input-label">Select Username</span>
                 <input type="text" ng-model="un">
             </label>
         </div>
         <div>
             <label class="item item-input">
-                <span class="input-label">password</span>
+                <span class="input-label">Email Address</span>
+                <input type="email" ng-model="em">
+            </label>
+        </div>
+        <div>
+            <label class="item item-input">
+                <span class="input-label">Choose a Unique Password</span>
                 <input type="password" ng-model="pw">
             </label>
         </div>
@@ -22,8 +28,8 @@
         <br>
         <br>
         <div style="text-align: center;">        
-            <button class="button button-assertive" ng-click="login(un, pw)">
-                Login
+            <button class="button button-assertive" ng-click="newAccount(un, em, pw)">
+                Create Account
             </button>
         </div>
     </ion-content>
