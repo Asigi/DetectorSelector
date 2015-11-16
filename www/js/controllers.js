@@ -13,7 +13,7 @@ angular.module('DetectorSelector.controllers', ['DetectorSelector.services', 'ng
             $scope.goLogin = function () {
                 $state.go('app.login');
             };
-            
+
             $scope.goNewAccount = function () {
                 $state.go('app.newAccount');
             };
@@ -72,12 +72,33 @@ angular.module('DetectorSelector.controllers', ['DetectorSelector.services', 'ng
             };
         })
 
-        .controller('NewAccountCtrl', function($scope, $rootScope, $state){
-            
-            $scope.newAccount = function(un, em, pw){
-                
+        .controller('NewAccountCtrl', function ($scope, $rootScope, $state) {
+
+            $scope.newAccount = function (un, em, pw) {
+
                 console.log(un + em + pw);
-                
+
+                var user = new Parse.User();
+                user.set("username", un);
+                user.set("password", pw);
+                user.set("email", em);
+
+                user.signUp(null, {
+                    success: function (user) {
+                        // Hooray! Let them use the app now.
+                        console.log("success, your username is: ");
+                        console.log(user);
+                        $state.go('app.home');
+                        
+                    },
+                    error: function (user, error) {
+                        // Show the error message somewhere and let the user try again.
+                        alert("Error: " + error.code + " " + error.message);
+                    }
+                });
+
+                //cntrol shift f
+
             };
         })
 
