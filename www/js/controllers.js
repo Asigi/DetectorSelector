@@ -44,6 +44,11 @@ angular.module('DetectorSelector.controllers', ['DetectorSelector.services', 'ng
         })
         
         .controller('LoginCtrl', function($scope, $rootScope, $state) {
+            
+            //test user credentials:
+                //un: testuser
+                //pw: pass
+            
             $scope.login = function(un, pw){
                 console.log("UserName: " + un);
                 console.log("Password: " + pw);
