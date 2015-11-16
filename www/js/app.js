@@ -6,7 +6,7 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('DetectorSelector', ['ionic', 'DetectorSelector.controllers', 'DetectorSelector.services', 'ngSanitize', 'ngIOS9UIWebViewPatch'])
 
-.run(function($ionicPlatform) {
+.run(function($ionicPlatform,  $rootScope) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -15,7 +15,12 @@ angular.module('DetectorSelector', ['ionic', 'DetectorSelector.controllers', 'De
     Parse.initialize("vNjxA8HNaeiyoMcTvZsW246oW1sFjqUrHEJzYBqv",
     "1K4Y79A83J8fKVePwxIrXTqHi2mu8ntsdMDGUkUv");
     
-    console.log("im here");
+    if ($rootScope.loggedIn = true) {
+        Parse.User.logOut();
+        console.log("user was logged out");
+    }
+    
+    $rootScope.loggedIn = false;
     
     
     
