@@ -62,10 +62,11 @@ angular.module('DetectorSelector.controllers', ['DetectorSelector.services', 'ng
                         // Do stuff after successful login.
                         console.log("success, your username is: ");
                         console.log(user);
+                        $state.go('app.home');
                     },
                     error: function (user, error) {
                         // The login failed. Check error to see why.
-                        console.log("shit error: " + error);
+                        console.log("Failed to Log in: " + error);
                     }
                 });
             };
