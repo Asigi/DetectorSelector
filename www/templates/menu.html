@@ -40,11 +40,16 @@
         </ion-header-bar>
         <ion-content>
             <ion-list>
-                <ion-item menu-close ng-click="goLogin()">
+                <ion-item menu-close ng-click="goLogin()" ng-hide="loggedIn">
                     Login
                 </ion-item>
-                <ion-item menu-close ng-click="goNewAccount()">
+                <ion-item menu-close ng-click="goNewAccount()" ng-hide="loggedIn">
                     Create New Account
+                </ion-item>
+                <ion-item menu-close ng-click="logout()" ng-show="loggedIn">
+                    Logout
+                </ion-item><ion-item menu-close ng-click="showFavorites()" ng-show="loggedIn">
+                    My Favorites
                 </ion-item>
             </ion-list>
         </ion-content>

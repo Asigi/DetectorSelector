@@ -22,6 +22,14 @@
                 </div>
             </div>
             <p>User Rating: {{selected.userRating}}</p>
+            <div ng-show="loggedIn">
+                <button class="button button-energized icon-left ion-android-star-outline" style="color: black;">   
+                    Add Favorite
+                </button>
+                <button class="button button-energized icon-left ion-android-textsms" style="color: black;">   
+                    Add Comment
+                </button>
+            </div>
         </div>
         <div class="detectorLargeDetails">
             <h4 style="text-align: left;"><b>Description:</b></h4>

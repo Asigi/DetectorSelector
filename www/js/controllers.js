@@ -1,6 +1,6 @@
 angular.module('DetectorSelector.controllers', ['DetectorSelector.services', 'ngSanitize'])
 
-        .controller('MenuCtrl', function ($scope, $state) {
+        .controller('MenuCtrl', function ($scope, $rootScope, $ionicLoading, $state) {
 
             $scope.goHome = function () {
                 $state.go('app.home');
@@ -20,6 +20,20 @@ angular.module('DetectorSelector.controllers', ['DetectorSelector.services', 'ng
 
             $scope.goAbout = function () {
                 $state.go('app.about');
+            };
+            
+            //TODO: Logout Does not currently work
+            $scope.logOut = function() {
+                Parse.User.logout();
+                $rootScope.loggedIn = false;
+                console.log("Logged Out!");
+                $ionicLoading.show({ template: 'Logged out!', noBackdrop: true, duration: 2000 });
+                $state.go('app.home');
+            };
+            
+            //TODO: Implement showFav
+            $scope.showFavorites = function() {
+                
             };
         })
 
@@ -47,7 +61,7 @@ angular.module('DetectorSelector.controllers', ['DetectorSelector.services', 'ng
 
         })
 
-        .controller('LoginCtrl', function ($scope, $rootScope, $state) {
+        .controller('LoginCtrl', function ($scope, $ionicLoading, $rootScope, $state) {
 
             //test user credentials:
             //un: testuser
@@ -62,10 +76,13 @@ angular.module('DetectorSelector.controllers', ['DetectorSelector.services', 'ng
                         // Do stuff after successful login.
                         console.log("success, your username is: ");
                         console.log(user);
+                        $rootScope.loggedIn = true;
+                        $ionicLoading.show({ template: 'Logged In!', noBackdrop: true, duration: 2000 });
                         $state.go('app.home');
                     },
                     error: function (user, error) {
                         // The login failed. Check error to see why.
+                        $ionicLoading.show({ template: 'Failed to log in', noBackdrop: true, duration: 2000 });
                         console.log("Failed to Log in: " + error);
                     }
                 });
