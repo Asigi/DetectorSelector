@@ -541,7 +541,7 @@ angular.module('DetectorSelector.controllers', ['DetectorSelector.services', 'ng
                 }
             };
 
-            $scope.addFavorite = function() {
+            $scope.addFavorite = function(id) {
                 
             };
             
