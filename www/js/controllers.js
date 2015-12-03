@@ -21,19 +21,19 @@ angular.module('DetectorSelector.controllers', ['DetectorSelector.services', 'ng
             $scope.goAbout = function () {
                 $state.go('app.about');
             };
-            
+
             //TODO: Logout Does not currently work
-            $scope.logOut = function() {
+            $scope.logOut = function () {
                 Parse.User.logout();
                 $rootScope.loggedIn = false;
                 console.log("Logged Out!");
-                $ionicLoading.show({ template: 'Logged out!', noBackdrop: true, duration: 2000 });
+                $ionicLoading.show({template: 'Logged out!', noBackdrop: true, duration: 2000});
                 $state.go('app.home');
             };
-            
+
             //TODO: Implement showFav
-            $scope.showFavorites = function() {
-                
+            $scope.showFavorites = function () {
+
             };
         })
 
@@ -77,12 +77,12 @@ angular.module('DetectorSelector.controllers', ['DetectorSelector.services', 'ng
                         console.log("success, your username is: ");
                         console.log(user);
                         $rootScope.loggedIn = true;
-                        $ionicLoading.show({ template: 'Logged In!', noBackdrop: true, duration: 2000 });
+                        $ionicLoading.show({template: 'Logged In!', noBackdrop: true, duration: 2000});
                         $state.go('app.home');
                     },
                     error: function (user, error) {
                         // The login failed. Check error to see why.
-                        $ionicLoading.show({ template: 'Failed to log in', noBackdrop: true, duration: 2000 });
+                        $ionicLoading.show({template: 'Failed to log in', noBackdrop: true, duration: 2000});
                         console.log("Failed to Log in: " + error);
                     }
                 });
@@ -106,7 +106,7 @@ angular.module('DetectorSelector.controllers', ['DetectorSelector.services', 'ng
                         console.log("success, your username is: ");
                         console.log(user);
                         $state.go('app.home');
-                        
+
                     },
                     error: function (user, error) {
                         // Show the error message somewhere and let the user try again.
@@ -251,7 +251,7 @@ angular.module('DetectorSelector.controllers', ['DetectorSelector.services', 'ng
             };
         })
 
-        .controller('DetectorDetailsCtrl', function ($scope, $rootScope, $stateParams) {
+        .controller('DetectorDetailsCtrl', function ($scope, $rootScope, $state, $stateParams) {
 
             //set the proper rad/chem/bio image
             switch ($rootScope.selected.type) {
@@ -540,15 +540,20 @@ angular.module('DetectorSelector.controllers', ['DetectorSelector.services', 'ng
                         return "lib/detectorData/img/tier.png";
                 }
             };
-            
-            $scope.addFavorite = function(){
+
+            $scope.addFavorite = function() {
                 
             };
             
             $scope.addComment = function(){
-                
-                
+                $state.go('app.comment');
             };
+
+        })
+
+
+        .controller('CommentCtrl', function() {
+            
         })
 
         .controller('AboutCtrl', function () {
