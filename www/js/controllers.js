@@ -23,8 +23,10 @@ angular.module('DetectorSelector.controllers', ['DetectorSelector.services', 'ng
             };
 
             //TODO: Logout Does not currently work
-            $scope.logOut = function () {
-                Parse.User.logout();
+            $scope.logout = function () {
+                
+                Parse.User.logOut();
+                
                 $rootScope.loggedIn = false;
                 console.log("Logged Out!");
                 $ionicLoading.show({template: 'Logged out!', noBackdrop: true, duration: 2000});
@@ -99,6 +101,10 @@ angular.module('DetectorSelector.controllers', ['DetectorSelector.services', 'ng
                 user.set("username", un);
                 user.set("password", pw);
                 user.set("email", em);
+                
+                var array = [];
+                array.push(100);
+                user.set("favArray", array);
 
                 user.signUp(null, {
                     success: function (user) {
@@ -251,7 +257,7 @@ angular.module('DetectorSelector.controllers', ['DetectorSelector.services', 'ng
             };
         })
 
-        .controller('DetectorDetailsCtrl', function ($scope, $rootScope, $state, $stateParams) {
+        .controller('DetectorDetailsCtrl', function ($scope, $rootScope, $state, $stateParams, $ionicLoading) {
 
             //set the proper rad/chem/bio image
             switch ($rootScope.selected.type) {
@@ -542,7 +548,20 @@ angular.module('DetectorSelector.controllers', ['DetectorSelector.services', 'ng
             };
 
             $scope.addFavorite = function(id) {
-                
+                var user = Parse.User.current().addUnique("favArray", id);
+              
+                user.save(null, {
+                    success: function () {
+                        // Hooray! Saved
+                        $ionicLoading.show({template: 'Added to favorites!', noBackdrop: true, duration: 2000});
+
+                    },
+                    error: function () {
+                        // Show the error message somewhere and let the user try again.
+                       $ionicLoading.show({template: 'Was not able to add to favorites!', noBackdrop: true, duration: 2000});
+                    }
+                });
+               
             };
             
             $scope.addComment = function(){
