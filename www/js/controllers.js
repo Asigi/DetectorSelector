@@ -35,6 +35,21 @@ angular.module('DetectorSelector.controllers', ['DetectorSelector.services', 'ng
 
             //TODO: Implement showFav
             $scope.showFavorites = function () {
+                
+                var array = Parse.User.current().get("favArray");
+                
+                console.log(array.toString());
+
+
+
+
+
+
+
+
+
+
+
 
             };
         })
