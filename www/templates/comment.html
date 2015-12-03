@@ -1,18 +1,20 @@
 <ion-view>
     <ion-nav-title>
-        <span style="color: whitesmoke;">Detector Selector</span>
+        <span style="color: whitesmoke;">{{selected.DetectorName}}</span>
     </ion-nav-title>
     <ion-content style="text-align: center">  
         <br>
         <br>
+        <label class="item item-input item-stacked-label">
+            <span class="input-label">Detector Comment</span>
+            <input ng-model="comment" type="text" placeholder="Comment">
+        </label>
+        <br>      
         <br>
         <br>
-        <br>
-        <img src="lib/detectorData/img/home_icon.jpg" style="height:100px; opacity: 0.7;">
-        <br>
-        <br>
-        <p>Comment</p>
-        <br>        
+        <button class="button button-energized icon-left ion-android-textsms" ng-click="submitComment(comment)" style="color: black;">   
+            Submit Comment
+        </button>
     </ion-content>
     <ion-footer-bar class="bar-stable"></ion-footer-bar>
 </ion-view>

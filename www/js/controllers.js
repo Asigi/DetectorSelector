@@ -552,8 +552,11 @@ angular.module('DetectorSelector.controllers', ['DetectorSelector.services', 'ng
         })
 
 
-        .controller('CommentCtrl', function() {
-            
+        .controller('CommentCtrl', function($scope) {
+            $scope.submitComment = function(comment){
+              console.log(comment);  
+                
+            };
         })
 
         .controller('AboutCtrl', function () {
