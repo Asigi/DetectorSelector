@@ -18,11 +18,11 @@ angular.module('DetectorSelector.services', ['ngSanitize'])
             }
 
             //refine the search
-            function getCustomDetectors(usrType, usrScen, usrTier) {
+            function getCustomDetectors(usrType, usrScen, usrTier, faves) {
                 var deferred = $q.defer();
                 getDetectors().then(function (detsList) {
                     //filter the list by type
-                    if (usrType !== '.'){
+                    if (usrType !== '.') {
                         detsList = $filter('filter')(detsList, {type: usrType});
                     }
                     //order by desired scenario
@@ -39,6 +39,18 @@ angular.module('DetectorSelector.services', ['ngSanitize'])
                         else if (usrScen === 'analytic') {
                             detsList = $filter('orderBy')(detsList, ["bioAnalTier", "chemAnalTier", "radAnalTier"]);
                         }
+                        else if (usrScen === 'faves') {
+                            var i;
+                            var favorites = [];
+                            var detector;
+                            for (i = 0; i < faves.length; i++) {
+                                var k = faves[i];
+                                detector = $filter('filter')(detsList, {DetectorID: k}, true);
+                                favorites.push(detector[0]);
+                            }
+                            deferred.resolve(favorites);
+                            return deferred.promise;
+                        }
                     }
                     deferred.resolve(detsList);
                 });
@@ -51,8 +63,8 @@ angular.module('DetectorSelector.services', ['ngSanitize'])
                 getDetectors: function () {
                     return getDetectors();
                 },
-                getCustomDetectors: function(t,s,ti){
-                    return getCustomDetectors(t,s,ti);
+                getCustomDetectors: function (t, s, ti, faves) {
+                    return getCustomDetectors(t, s, ti, faves);
                 }
             };
         });

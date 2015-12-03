@@ -34,22 +34,15 @@ angular.module('DetectorSelector.controllers', ['DetectorSelector.services', 'ng
             };
 
             //TODO: Implement showFav
-            $scope.showFavorites = function () {
+            $scope.showFavorites = function (scen) {
                 
                 var array = Parse.User.current().get("favArray");
-                
-                console.log(array.toString());
-
-
-
-
-
-
-
-
-
-
-
+                $rootScope.faves = array;
+                $rootScope.userType = '.';
+                $rootScope.userScenario = 'faves';
+                //console.log(array.toString());
+                $state.go('app.detectors',
+                        {scenario: scen});
 
             };
         })
@@ -200,7 +193,7 @@ angular.module('DetectorSelector.controllers', ['DetectorSelector.services', 'ng
 
         .controller('DetectorsCtrl', function ($scope, $state, $filter, $rootScope, DetectorFactory) {
 
-            DetectorFactory.getCustomDetectors($rootScope.userType, $rootScope.userScenario, $rootScope.userTier).then(function (dets) {
+            DetectorFactory.getCustomDetectors($rootScope.userType, $rootScope.userScenario, $rootScope.userTier, $rootScope.faves).then(function (dets) {
                 $scope.detectors = dets;
             });
 
