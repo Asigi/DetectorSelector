@@ -23,7 +23,7 @@
             </div>
             <p>User Rating: {{selected.userRating}}</p>
             <div ng-show="loggedIn">
-                <button class="button button-energized icon-left ion-android-star-outline" style="color: black;">   
+                <button class="button button-energized icon-left ion-android-star-outline" ng-click="addFavorite({{selected.DetectorID}})" style="color: black;">   
                     Add Favorite
                 </button>
                 <button class="button button-energized icon-left ion-android-textsms" style="color: black;">   

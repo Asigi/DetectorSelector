@@ -540,6 +540,15 @@ angular.module('DetectorSelector.controllers', ['DetectorSelector.services', 'ng
                         return "lib/detectorData/img/tier.png";
                 }
             };
+            
+            $scope.addFavorite = function(){
+                
+            };
+            
+            $scope.addComment = function(){
+                
+                
+            };
         })
 
         .controller('AboutCtrl', function () {
