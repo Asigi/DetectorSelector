@@ -24,9 +24,9 @@ angular.module('DetectorSelector.controllers', ['DetectorSelector.services', 'ng
 
             //TODO: Logout Does not currently work
             $scope.logout = function () {
-                
+
                 Parse.User.logOut();
-                
+
                 $rootScope.loggedIn = false;
                 console.log("Logged Out!");
                 $ionicLoading.show({template: 'Logged out!', noBackdrop: true, duration: 2000});
@@ -35,7 +35,7 @@ angular.module('DetectorSelector.controllers', ['DetectorSelector.services', 'ng
 
             //TODO: Implement showFav
             $scope.showFavorites = function (scen) {
-                
+
                 var array = Parse.User.current().get("favArray");
                 $rootScope.faves = array;
                 $rootScope.userType = '.';
@@ -109,7 +109,7 @@ angular.module('DetectorSelector.controllers', ['DetectorSelector.services', 'ng
                 user.set("username", un);
                 user.set("password", pw);
                 user.set("email", em);
-                
+
                 var array = [];
                 array.push(100);
                 user.set("favArray", array);
@@ -555,9 +555,9 @@ angular.module('DetectorSelector.controllers', ['DetectorSelector.services', 'ng
                 }
             };
 
-            $scope.addFavorite = function(id) {
+            $scope.addFavorite = function (id) {
                 var user = Parse.User.current().addUnique("favArray", id);
-              
+
                 user.save(null, {
                     success: function () {
                         // Hooray! Saved
@@ -566,28 +566,75 @@ angular.module('DetectorSelector.controllers', ['DetectorSelector.services', 'ng
                     },
                     error: function () {
                         // Show the error message somewhere and let the user try again.
-                       $ionicLoading.show({template: 'Was not able to add to favorites!', noBackdrop: true, duration: 2000});
+                        $ionicLoading.show({template: 'Was not able to add to favorites!', noBackdrop: true, duration: 2000});
                     }
                 });
-               
+
             };
-            
-            $scope.addComment = function(){
+
+            $scope.addComment = function () {
                 $state.go('app.comment');
             };
 
         })
 
 
-        .controller('CommentCtrl', function($scope) {
-            $scope.submitComment = function(id, comment){
+        .controller('CommentCtrl', function ($scope) {
+            $scope.submitComment = function (id, comment) {
                 console.log(id, comment);
+
+                var DetectComment = Parse.Object.extend("DetectorComment");
+
+              
+                var theComment = {
+                    "id": id,
+                    "comment": comment
+                };
                 
+                var theComment2 = {
+                    "id": id + 1,
+                    "comment": comment + " yo"
+                };
+
+                /*
+                var userId = "" + Parse.User.current().id;
+                console.log(userId);
+
+                var comment = new DetectComment();
                 
+                comment.set("userId", userId.toString());
+            
+                comment.addUnique("comment", theComment);
+                comment.addUnique("comment", theComment2);
+                comment.save(null, {
+                    success: function (object) {
+                        console.log("success");
+                    },
+                    error: function (model, error) {
+                        console.log(error);
+                    }
+                });
                 
+                */
+
+                var user = Parse.User.current();
                 
+                var comment = new DetectComment();
+                comment.addUnique("comment", theComment);
+                comment.addUnique("comment", theComment2);
                 
-                
+                comment.set("user", user);
+
+                comment.save(null, {
+                    success: function (object) {
+                        console.log("success");
+                    },
+                    error: function (model, error) {
+                        console.log(error);
+                    }
+                });
+
+
             };
         })
 
