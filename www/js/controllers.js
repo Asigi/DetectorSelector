@@ -580,8 +580,13 @@ angular.module('DetectorSelector.controllers', ['DetectorSelector.services', 'ng
 
 
         .controller('CommentCtrl', function($scope) {
-            $scope.submitComment = function(comment){
-              console.log(comment);  
+            $scope.submitComment = function(id, comment){
+                console.log(id, comment);
+                
+                
+                
+                
+                
                 
             };
         })
