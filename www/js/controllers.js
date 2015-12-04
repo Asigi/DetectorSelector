@@ -591,10 +591,12 @@ angular.module('DetectorSelector.controllers', ['DetectorSelector.services', 'ng
                     "comment": comment
                 };
                 
+                /*
                 var theComment2 = {
                     "id": id + 1,
                     "comment": comment + " yo"
                 };
+                */
 
                 /*
                 var userId = "" + Parse.User.current().id;
