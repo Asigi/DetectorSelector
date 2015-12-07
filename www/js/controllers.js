@@ -579,60 +579,67 @@ angular.module('DetectorSelector.controllers', ['DetectorSelector.services', 'ng
         })
 
 
-        .controller('CommentCtrl', function ($scope) {
+        .controller('CommentCtrl', function ($scope, $ionicLoading, $state, $rootScope) {
             $scope.submitComment = function (id, comment) {
                 console.log(id, comment);
 
                 var DetectComment = Parse.Object.extend("DetectorComment");
 
-              
+
                 var theComment = {
                     "id": id,
                     "comment": comment
                 };
-                
-                /*
-                var theComment2 = {
-                    "id": id + 1,
-                    "comment": comment + " yo"
-                };
-                */
 
                 /*
-                var userId = "" + Parse.User.current().id;
-                console.log(userId);
+                 var theComment2 = {
+                 "id": id + 1,
+                 "comment": comment + " yo"
+                 };
+                 */
 
-                var comment = new DetectComment();
-                
-                comment.set("userId", userId.toString());
-            
-                comment.addUnique("comment", theComment);
-                comment.addUnique("comment", theComment2);
-                comment.save(null, {
-                    success: function (object) {
-                        console.log("success");
-                    },
-                    error: function (model, error) {
-                        console.log(error);
-                    }
-                });
-                
-                */
+                /*
+                 var userId = "" + Parse.User.current().id;
+                 console.log(userId);
+                 
+                 var comment = new DetectComment();
+                 
+                 comment.set("userId", userId.toString());
+                 
+                 comment.addUnique("comment", theComment);
+                 comment.addUnique("comment", theComment2);
+                 comment.save(null, {
+                 success: function (object) {
+                 console.log("success");
+                 },
+                 error: function (model, error) {
+                 console.log(error);
+                 }
+                 });
+                 
+                 */
 
                 var user = Parse.User.current();
-                
+
                 var comment = new DetectComment();
                 comment.addUnique("comment", theComment);
-                comment.addUnique("comment", theComment2);
-                
+
                 comment.set("user", user);
 
                 comment.save(null, {
                     success: function (object) {
                         console.log("success");
+                        $ionicLoading.show({template: 'Comment Saved!', noBackdrop: true, duration: 2000});
+                        det = $rootScope.selected;
+                        $state.go('app.details',
+                                {detectorDetails: det});
                     },
                     error: function (model, error) {
                         console.log(error);
+                        $ionicLoading.show({template: 'Error Saving Comment', noBackdrop: true, duration: 2000});
+                        det = $rootScope.selected;
+                        $state.go('app.details',
+                                {detectorDetails: det});
                     }
                 });
 
