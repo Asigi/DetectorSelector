@@ -95,6 +95,15 @@
                 </small>
             </p>
         </div>
+        <div ng-show="commentsAvail" style="text-align: left;">
+            <h4 style="padding-left: 5px;">  User Comments:</h4>
+            <ion-list>
+                <ion-item ng-repeat="comment in DetComments">
+                    <p><b>{{comment.user}}:</b></p>
+                    <p style="padding-left: 5px;">{{comment.comment}}</p>
+                </ion-item>
+            </ion-list>
+        </div>
     </ion-content>
 
 </ion-view>

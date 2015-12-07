@@ -103,7 +103,7 @@ angular.module('DetectorSelector.controllers', ['DetectorSelector.services', 'ng
 
             $scope.newAccount = function (un, em, pw) {
 
-                console.log(un + em + pw);
+                //console.log(un + em + pw);
 
                 var user = new Parse.User();
                 user.set("username", un);
@@ -111,7 +111,7 @@ angular.module('DetectorSelector.controllers', ['DetectorSelector.services', 'ng
                 user.set("email", em);
 
                 var array = [];
-                array.push(100);
+                //array.push(100);
                 user.set("favArray", array);
 
                 user.signUp(null, {
@@ -576,6 +576,33 @@ angular.module('DetectorSelector.controllers', ['DetectorSelector.services', 'ng
                 $state.go('app.comment');
             };
 
+            var comments = Parse.Object.extend("DetectorComment");
+            var query = new Parse.Query(comments);
+
+            query.equalTo("DetectorId", $rootScope.selected.DetectorID);
+            query.find({
+                success: function (results) {
+                    if (results.length > 0) {
+                        //get and display comments if available
+                        var commentFlag = true;
+                        $scope.commentsAvail = commentFlag;
+                    }
+                    var comments = [];
+                    for (var i = 0; i < results.length; i++) {
+                        comments[i] = {
+                            "user" : results[i].get("userName"),
+                            "comment" : results[i].get("comment")
+                        };
+                    }
+                    $scope.DetComments = comments;
+                    console.log(comments);
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+
+
         })
 
 
@@ -583,50 +610,18 @@ angular.module('DetectorSelector.controllers', ['DetectorSelector.services', 'ng
             $scope.submitComment = function (id, comment) {
                 console.log(id, comment);
 
+                var user = Parse.User.current();
+                var userName = user.get("username");
                 var DetectComment = Parse.Object.extend("DetectorComment");
 
+                var userComment = new DetectComment();
+                userComment.addUnique();
+                userComment.set("comment", comment);
+                userComment.set("DetectorId", id);
+                userComment.set("userId", user.id.toString());
+                userComment.set("userName", userName.toString());
 
-                var theComment = {
-                    "id": id,
-                    "comment": comment
-                };
-
-                /*
-                 var theComment2 = {
-                 "id": id + 1,
-                 "comment": comment + " yo"
-                 };
-                 */
-
-                /*
-                 var userId = "" + Parse.User.current().id;
-                 console.log(userId);
-                 
-                 var comment = new DetectComment();
-                 
-                 comment.set("userId", userId.toString());
-                 
-                 comment.addUnique("comment", theComment);
-                 comment.addUnique("comment", theComment2);
-                 comment.save(null, {
-                 success: function (object) {
-                 console.log("success");
-                 },
-                 error: function (model, error) {
-                 console.log(error);
-                 }
-                 });
-                 
-                 */
-
-                var user = Parse.User.current();
-
-                var comment = new DetectComment();
-                comment.addUnique("comment", theComment);
-
-                comment.set("user", user);
-
-                comment.save(null, {
+                userComment.save(null, {
                     success: function (object) {
                         console.log("success");
                         $ionicLoading.show({template: 'Comment Saved!', noBackdrop: true, duration: 2000});
