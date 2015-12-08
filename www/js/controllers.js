@@ -48,10 +48,12 @@ angular.module('DetectorSelector.controllers', ['DetectorSelector.services', 'ng
         })
 
         .controller('HomeCtrl', function ($scope, $rootScope, $state) {
-
+            
+            
             //go to a list of detectors filtered by desired scenario
             $scope.goScenario = function (scen) {
-                $rootScope.userScenario = scen;
+                $rootScope.faves = '';
+                $rootScope.userScenario = '';
                 $rootScope.userType = '';
                 $state.go('app.detectors',
                         {scenario: scen});

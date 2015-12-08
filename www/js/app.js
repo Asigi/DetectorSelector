@@ -6,7 +6,7 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('DetectorSelector', ['ionic', 'DetectorSelector.controllers', 'DetectorSelector.services', 'ngSanitize', 'ngIOS9UIWebViewPatch'])
 
-        .run(function ($ionicPlatform, $rootScope) {
+        .run(function ($ionicPlatform, $rootScope, $state) {
             $ionicPlatform.ready(function () {
                 // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
                 // for form inputs)
@@ -32,6 +32,10 @@ angular.module('DetectorSelector', ['ionic', 'DetectorSelector.controllers', 'De
                     StatusBar.styleDefault();
                 }
             });
+
+            $ionicPlatform.registerBackButtonAction(function(e) {
+            e.preventDefault();
+        }, 99);
         })
 
         .config(function ($stateProvider, $urlRouterProvider) {
