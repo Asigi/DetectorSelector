@@ -2,11 +2,11 @@ angular.module('DetectorSelector.services', ['ngSanitize'])
 
         .factory('CommentFactory', function ($q, $rootScope) {
 
-            function getComments() {
+            function getComments(detectorID) {
                 var comments = Parse.Object.extend("DetectorComment");
                 var query = new Parse.Query(comments);
                 var deferred = $q.defer();
-                query.equalTo("DetectorId", $rootScope.selected.DetectorID);
+                query.equalTo("DetectorId", detectorID);
                 query.find({
                     success: function (results) {
                         var comments = [];
@@ -27,8 +27,8 @@ angular.module('DetectorSelector.services', ['ngSanitize'])
             }
 
             return {
-                getComments: function () {
-                    return getComments();
+                getComments: function (detectorID) {
+                    return getComments(detectorID);
                 }
             };
 
