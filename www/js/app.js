@@ -6,7 +6,7 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('DetectorSelector', ['ionic', 'DetectorSelector.controllers', 'DetectorSelector.services', 'ngSanitize', 'ngIOS9UIWebViewPatch'])
 
-        .run(function ($ionicPlatform, $rootScope, $state) {
+        .run(function ($ionicPlatform, $rootScope, $state, $ionicHistory) {
             $ionicPlatform.ready(function () {
                 // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
                 // for form inputs)

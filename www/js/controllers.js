@@ -1,6 +1,6 @@
 angular.module('DetectorSelector.controllers', ['DetectorSelector.services', 'ngSanitize'])
 
-        .controller('MenuCtrl', function ($scope, $rootScope, $ionicLoading, $state) {
+        .controller('MenuCtrl', function ($scope, $rootScope, $ionicHistory, $ionicLoading, $state) {
 
             $scope.goHome = function () {
                 $state.go('app.home');
@@ -40,16 +40,22 @@ angular.module('DetectorSelector.controllers', ['DetectorSelector.services', 'ng
                 $rootScope.faves = array;
                 $rootScope.userType = '.';
                 $rootScope.userScenario = 'faves';
-                //console.log(array.toString());
-                $state.go('app.detectors',
-                        {scenario: scen});
+
+                if ($ionicHistory.currentView().stateId === 'app.detectors') {
+                    $ionicHistory.clearCache();
+                    $state.go($state.current, {scenario: scen}, {reload: true});
+                } else {
+                    //console.log(array.toString());
+                    $state.go('app.detectors',
+                            {scenario: scen});
+                }
 
             };
         })
 
         .controller('HomeCtrl', function ($scope, $rootScope, $state) {
-            
-            
+
+
             //go to a list of detectors filtered by desired scenario
             $scope.goScenario = function (scen) {
                 $rootScope.faves = '';
@@ -195,7 +201,7 @@ angular.module('DetectorSelector.controllers', ['DetectorSelector.services', 'ng
 
         .controller('DetectorsCtrl', function ($scope, $state, $window, $rootScope, DetectorFactory) {
 
-            
+
             DetectorFactory.getCustomDetectors($rootScope.userType, $rootScope.userScenario, $rootScope.userTier, $rootScope.faves).then(function (dets) {
                 $scope.detectors = dets;
             });
@@ -579,12 +585,12 @@ angular.module('DetectorSelector.controllers', ['DetectorSelector.services', 'ng
                 $state.go('app.comment');
             };
 
-            CommentFactory.getComments($rootScope.selected.DetectorID).then(function(comments){
+            CommentFactory.getComments($rootScope.selected.DetectorID).then(function (comments) {
                 if (comments.length > 0) {
-                            //get and display comments if available
-                            var commentFlag = true;
-                            $scope.commentsAvail = commentFlag;
-                        }
+                    //get and display comments if available
+                    var commentFlag = true;
+                    $scope.commentsAvail = commentFlag;
+                }
                 $scope.DetComments = comments;
             });
 //            var comments = Parse.Object.extend("DetectorComment");
@@ -638,14 +644,14 @@ angular.module('DetectorSelector.controllers', ['DetectorSelector.services', 'ng
                         $ionicLoading.show({template: 'Comment Saved!', noBackdrop: true, duration: 2000});
                         det = $rootScope.selected;
                         $state.go('app.detectors',
-                            {scenario: $rootScope.userScenario});
+                                {scenario: $rootScope.userScenario});
                     },
                     error: function (model, error) {
                         console.log(error);
                         $ionicLoading.show({template: 'Error Saving Comment', noBackdrop: true, duration: 2000});
                         det = $rootScope.selected;
                         $state.go('app.detectors',
-                            {scenario: $rootScope.userScenario});
+                                {scenario: $rootScope.userScenario});
                     }
                 });
 
