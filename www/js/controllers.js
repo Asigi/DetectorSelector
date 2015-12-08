@@ -266,7 +266,7 @@ angular.module('DetectorSelector.controllers', ['DetectorSelector.services', 'ng
             };
         })
 
-        .controller('DetectorDetailsCtrl', function ($scope, $rootScope, $state, $stateParams, $ionicLoading) {
+        .controller('DetectorDetailsCtrl', function ($scope, $rootScope, $state, $stateParams, $ionicLoading, CommentFactory) {
 
             //set the proper rad/chem/bio image
             switch ($rootScope.selected.type) {
@@ -577,31 +577,39 @@ angular.module('DetectorSelector.controllers', ['DetectorSelector.services', 'ng
                 $state.go('app.comment');
             };
 
-            var comments = Parse.Object.extend("DetectorComment");
-            var query = new Parse.Query(comments);
-
-            query.equalTo("DetectorId", $rootScope.selected.DetectorID);
-            query.find({
-                success: function (results) {
-                    if (results.length > 0) {
-                        //get and display comments if available
-                        var commentFlag = true;
-                        $scope.commentsAvail = commentFlag;
-                    }
-                    var comments = [];
-                    for (var i = 0; i < results.length; i++) {
-                        comments[i] = {
-                            "user" : results[i].get("userName"),
-                            "comment" : results[i].get("comment")
-                        };
-                    }
-                    $scope.DetComments = comments;
-                    console.log(comments);
-                },
-                error: function (error) {
-                    console.log(error);
-                }
+            CommentFactory.getComments($rootScope.selected.DetectorID).then(function(comments){
+                if (comments.length > 0) {
+                            //get and display comments if available
+                            var commentFlag = true;
+                            $scope.commentsAvail = commentFlag;
+                        }
+                $scope.DetComments = comments;
             });
+//            var comments = Parse.Object.extend("DetectorComment");
+//            var query = new Parse.Query(comments);
+//
+//            query.equalTo("DetectorId", $rootScope.selected.DetectorID);
+//            query.find({
+//                success: function (results) {
+//                    if (results.length > 0) {
+//                        //get and display comments if available
+//                        var commentFlag = true;
+//                        $scope.commentsAvail = commentFlag;
+//                    }
+//                    var comments = [];
+//                    for (var i = 0; i < results.length; i++) {
+//                        comments[i] = {
+//                            "user" : results[i].get("userName"),
+//                            "comment" : results[i].get("comment")
+//                        };
+//                    }
+//                    $scope.DetComments = comments;
+//                    console.log(comments);
+//                },
+//                error: function (error) {
+//                    console.log(error);
+//                }
+//            });
 
 
         })
@@ -627,15 +635,15 @@ angular.module('DetectorSelector.controllers', ['DetectorSelector.services', 'ng
                         console.log("success");
                         $ionicLoading.show({template: 'Comment Saved!', noBackdrop: true, duration: 2000});
                         det = $rootScope.selected;
-                        $state.go('app.details',
-                                {detectorDetails: det});
+                        $state.go('app.detectors',
+                            {scenario: $rootScope.userScenario});
                     },
                     error: function (model, error) {
                         console.log(error);
                         $ionicLoading.show({template: 'Error Saving Comment', noBackdrop: true, duration: 2000});
                         det = $rootScope.selected;
-                        $state.go('app.details',
-                                {detectorDetails: det});
+                        $state.go('app.detectors',
+                            {scenario: $rootScope.userScenario});
                     }
                 });
 

@@ -15,12 +15,12 @@ angular.module('DetectorSelector', ['ionic', 'DetectorSelector.controllers', 'De
                 Parse.initialize("vNjxA8HNaeiyoMcTvZsW246oW1sFjqUrHEJzYBqv",
                         "1K4Y79A83J8fKVePwxIrXTqHi2mu8ntsdMDGUkUv");
 
-                if ($rootScope.loggedIn === true) {
-                    Parse.User.logOut();
-                    console.log("user was logged out");
-                }
-
-                $rootScope.loggedIn = false;
+//                if ($rootScope.loggedIn === true) {
+//                    Parse.User.logOut();
+//                    console.log("user was logged out");
+//                }
+//
+//                $rootScope.loggedIn = false;
 
 
 

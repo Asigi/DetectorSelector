@@ -1,5 +1,39 @@
 angular.module('DetectorSelector.services', ['ngSanitize'])
 
+        .factory('CommentFactory', function ($q, $rootScope) {
+
+            function getComments() {
+                var comments = Parse.Object.extend("DetectorComment");
+                var query = new Parse.Query(comments);
+                var deferred = $q.defer();
+                query.equalTo("DetectorId", $rootScope.selected.DetectorID);
+                query.find({
+                    success: function (results) {
+                        var comments = [];
+                        for (var i = 0; i < results.length; i++) {
+                            comments[i] = {
+                                "user": results[i].get("userName"),
+                                "comment": results[i].get("comment")
+                            };
+                        }
+                        deferred.resolve(comments);
+                        console.log(comments);
+                    },
+                    error: function (error) {
+                        console.log(error);
+                    }
+                });
+                return deferred.promise;
+            }
+
+            return {
+                getComments: function () {
+                    return getComments();
+                }
+            };
+
+        })
+
         .factory('DetectorFactory', function ($q, $http, $filter) {
 
             //returns a promise for a list of detectors 
