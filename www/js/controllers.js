@@ -191,8 +191,9 @@ angular.module('DetectorSelector.controllers', ['DetectorSelector.services', 'ng
 
         })
 
-        .controller('DetectorsCtrl', function ($scope, $state, $filter, $rootScope, DetectorFactory) {
+        .controller('DetectorsCtrl', function ($scope, $state, $window, $rootScope, DetectorFactory) {
 
+            
             DetectorFactory.getCustomDetectors($rootScope.userType, $rootScope.userScenario, $rootScope.userTier, $rootScope.faves).then(function (dets) {
                 $scope.detectors = dets;
             });
